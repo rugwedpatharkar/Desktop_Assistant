@@ -1,13 +1,5 @@
 Pyttsx3~=2.90
-
-SpeechRecognition
-
 Wikipedia~=1.4.0
-
-
-
 Pyautogui~=0.9.54
-
 pywhatkit~=5.4
 requests~=2.31.0
-PyAudio~=0.2.13
