@@ -39,6 +39,16 @@ def date():
     speak(year)
     print("The today's date is " + str(day) + "/" + str(month) + "/" + str(year))
 
+def daily_quote():
+    try:
+        quote_api_url = "https://zenquotes.io/api/random"
+        response = requests.get(quote_api_url)
+        data = response.json()
+        quote = data[0]['q']  # Extracting the quote from the response
+        author = data[0]['a']  # Extracting the author from the response
+        return f"{quote} - {author}"
+    except Exception as e:
+        return "Sorry, I couldn't fetch a daily quote at the moment."
 
 def wishme():
     print("Welcome back Rugwed!!")
@@ -241,6 +251,7 @@ if __name__ == "__main__":
                 notedown = open("notes.txt", "w")
                 notedown.write(data)
                 notedown.close()
+
             elif "you have any note for me" in query:
                 notedown = open("notes.txt", "r")
                 speak("You told me to notedown that " + notedown.read())
@@ -271,8 +282,9 @@ if __name__ == "__main__":
             elif "system information" in query:
                 system_info()
             elif "daily quote" in query or "inspirational message" in query:
-                # Add code for fetching and speaking daily quotes or inspirational messages
-                pass
+                quote_of_the_day = daily_quote()
+                speak("Here is your daily quote:")
+                speak(quote_of_the_day)
             else:
                 speak("I'm not sure how to respond to that. Can you please repeat?")
                 print("I'm not sure how to respond to that. Can you please repeat?")
