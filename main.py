@@ -13,6 +13,7 @@ import pyttsx3
 import requests
 import speech_recognition as sr
 import wikipedia
+import pywhatkit as kit
 
 engine = pyttsx3.init()
 
@@ -39,6 +40,7 @@ def date():
     speak(year)
     print("The today's date is " + str(day) + "/" + str(month) + "/" + str(year))
 
+
 def daily_quote():
     try:
         quote_api_url = "https://zenquotes.io/api/random"
@@ -49,6 +51,7 @@ def daily_quote():
         return f"{quote} - {author}"
     except Exception as e:
         return "Sorry, I couldn't fetch a daily quote at the moment."
+
 
 def wishme():
     print("Welcome back Rugwed!!")
@@ -117,9 +120,9 @@ def takecommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
-        r.pause_threshold = 10
+        r.pause_threshold = 5  # Reduced from 10
         try:
-            audio = r.listen(source, timeout=20, phrase_time_limit=20)
+            audio = r.listen(source, timeout=10, phrase_time_limit=10)  # Reduced from 20
             print("Recognizing...")
             query = r.recognize_google(audio, language="en-in")
             print(query)
@@ -137,34 +140,41 @@ def takecommand():
 if __name__ == "__main__":
     wishme()
     trigger_phrase = "hello assistant"
-    active = True
+    active = False
 
     while True:
-        query = takecommand().lower()
+        if not active:
+            query = takecommand().lower()
 
-        if trigger_phrase in query:
-            speak("How can I assist you?")
-            active = True
+            if trigger_phrase in query:
+                speak("How may I help you?")
+                active = True
 
         while active:
             query = takecommand().lower()
 
             if "deactivate" in query or "exit" in query:
-                deactivate()
+                speak("Deactivating. Say the trigger phrase to activate again.")
+                active = False
 
             elif "time" in query:
                 time()
+                active = False
             elif "date" in query:
                 date()
+                active = False
             elif "who are you" in query:
                 speak("I'm a desktop voice assistant.")
                 print("I'm a desktop voice assistant.")
+                active = False
             elif "how are you" in query:
                 speak("I'm fine, What about you?")
                 print("I'm fine, What about you?")
+                active = False
             elif "fine" in query or "good" in query:
                 speak("Glad to hear that !!")
                 print("Glad to hear that !!")
+                active = False
             elif "wikipedia" in query:
                 try:
                     speak("Ok wait, I'm searching...")
@@ -174,18 +184,48 @@ if __name__ == "__main__":
                     speak(result)
                 except Exception as e:
                     speak("Can't find this page, please ask something else")
+                active = False
             elif "open" in query:
                 open_website(query)
-                break
+                speak("Task completed. Say the trigger phrase to activate again.")
+                active = False
             elif "lock screen" in query:
                 lock_screen()
-                speak("Screen locked.")
+                speak("Screen locked. Task completed. Say the trigger phrase to activate again.")
+                active = False
             elif "hibernate" in query:
                 hibernate_system()
-                speak("System going into hibernation.")
+                speak("System going into hibernation. Task completed. Say the trigger phrase to activate again.")
+                active = False
             elif "open microsoft edge" in query:
                 msedgePath = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
                 os.startfile(msedgePath)
+                speak("Microsoft Edge opened. Task completed. Say the trigger phrase to activate again.")
+                active = False
+            elif "open youtube" in query:
+                wb.open("youtube.com")
+                speak("YouTube opened. Task completed. Say the trigger phrase to activate again.")
+                active = False
+            elif "open google" in query:
+                wb.open("google.com")
+                speak("Google opened. Task completed. Say the trigger phrase to activate again.")
+                active = False
+            elif "open stack overflow" in query:
+                wb.open("stackoverflow.com")
+                speak("Stack Overflow opened. Task completed. Say the trigger phrase to activate again.")
+                active = False
+            elif "play" in query:
+                try:
+                    speak("Please tell me the name of the song")
+                    song_name = takecommand()
+                    search_query = f"{song_name} song"
+                    kit.playonyt(search_query)
+                    speak("Playing the song. Task completed. Say the trigger phrase to activate again.")
+                    active = False
+                except Exception as e:
+                    speak(f"No results found for '{song_name}' on YouTube.")
+                    print(f"No results found for '{song_name}' on YouTube.")
+                    active = False
             elif "microsoft edge" in query:
                 try:
                     speak("What should I search?")
@@ -194,13 +234,15 @@ if __name__ == "__main__":
                     search = takecommand()
                     wb.get(msedgePath).open_new_tab(search)
                     print(search)
+                    active = False
                 except Exception as e:
                     speak("Can't open now, please try again later.")
                     print("Can't open now, please try again later.")
+                    active = False
             elif "weather" in query:
                 try:
-                    speak("What city you are in?")
-                    print("What city you are in?")
+                    speak("What city are you in?")
+                    print("What city are you in?")
                     user_api = "e383a51cd88ebd04d15807989d734a59"
                     location = takecommand()
                     complete_api_link = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + user_api
@@ -215,9 +257,11 @@ if __name__ == "__main__":
                     print("Weather Status for - {}  || {}".format(location.upper(), date_time))
                     speak("Current temperature is: {:.2f} deg C".format(temp_city))
                     print("Current temperature is: {:.2f} deg C".format(temp_city))
+                    active = False
                 except Exception as e:
                     speak("City can not be found, please give the valid city name.")
                     print("Can't open now, please give the valid city name.")
+                    active = False
             elif "news" in query:
                 query_params = {
                     "source": "bbc-news",
@@ -231,6 +275,7 @@ if __name__ == "__main__":
                 for i, article in enumerate(articles, start=1):
                     speak(f"News {i}: {article['title']}")
                     print(f"News {i}: {article['title']}")
+                active = False
             elif "remind me" in query:
                 speak("What should I remind you")
                 data = takecommand()
@@ -239,10 +284,12 @@ if __name__ == "__main__":
                 notedown = open("reminders.txt", "w")
                 notedown.write(data)
                 notedown.close()
+                active = False
             elif "you have something to remind me" in query:
                 notedown = open("reminders.txt", "r")
                 speak("You told me to remind you that " + notedown.read())
                 print("You told me to remind you that " + str(notedown.read()))
+                active = False
             elif "notedown" in query:
                 speak("What should I notedown")
                 data = takecommand()
@@ -251,17 +298,17 @@ if __name__ == "__main__":
                 notedown = open("notes.txt", "w")
                 notedown.write(data)
                 notedown.close()
-
+                active = False
             elif "you have any note for me" in query:
                 notedown = open("notes.txt", "r")
                 speak("You told me to notedown that " + notedown.read())
                 print("You told me to notedown that " + str(notedown.read()))
+                active = False
             elif "joke" in query:
                 def jokes(f):
                     data = requests.get(f)
                     tt = json.loads(data.text)
                     return tt
-
 
                 f = r"https://official-joke-api.appspot.com/jokes/programming/random"
                 a = jokes(f)
@@ -273,18 +320,22 @@ if __name__ == "__main__":
                     print(i["setup"])
                     speak(i["punchline"])
                     print(i["punchline"], "\n")
+                active = False
             elif "screenshot" in query:
                 screenshot()
                 speak("I've taken a screenshot, please check it")
+                active = False
             elif "shutdown" in query:
                 greetme()
                 quit()
             elif "system information" in query:
                 system_info()
+                active = False
             elif "daily quote" in query or "inspirational message" in query:
                 quote_of_the_day = daily_quote()
                 speak("Here is your daily quote:")
                 speak(quote_of_the_day)
+                active = False
             else:
                 speak("I'm not sure how to respond to that. Can you please repeat?")
                 print("I'm not sure how to respond to that. Can you please repeat?")

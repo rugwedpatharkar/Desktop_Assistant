@@ -2,8 +2,7 @@
 
 Desktop Assistant is a versatile Python-based application designed to enhance your desktop experience by streamlining basic operations and providing quick access to a variety of functions. This assistant seamlessly integrates with your desktop environment, allowing you to perform tasks like opening applications, conducting web searches, and taking screenshots. The screenshot feature enables you to capture your screen effortlessly. It also leverages APIs for weather updates and news, making it a valuable addition to your desktop.
 
-
-# Features
+## Features
 
 Application Launcher: Launch your favorite applications with a simple voice command or text input. Desktop Assistant provides a convenient way to open programs quickly and effortlessly.
 
@@ -19,8 +18,7 @@ News Updates: Stay up-to-date with the latest news. Desktop Assistant fetches ne
 
 Jokes: Everyone loves a good laugh. The assistant can brighten your day with a selection of jokes from the Official Jokes API.
 
-
-# Technologies
+## Technologies
 
 Python: The core of this project is built using Python, a versatile and widely used programming language.
 
@@ -30,8 +28,7 @@ API Integration: To provide real-time information such as weather updates, news,
 
 PyCharm IDE: The project is developed and maintained using PyCharm IDE, a popular IDE that provides a rich development environment for Python programming languages.
 
-
-# Advantages
+## Advantages
 
 Efficiency: Desktop Assistant simplifies common desktop tasks, making them quicker and more convenient. It can save you time and effort by automating various operations.
 
@@ -45,37 +42,36 @@ Information at Your Fingertips: With integrated weather, news, and entertainment
 
 Open Source: This project is open source, so you can contribute to its development and adapt it to your specific requirements.
 
-
-# Getting Started:
+## Getting Started
 
 Follow the instructions below to get started with Desktop Assistant.
 
-
-## Installation
+### Installation
 
 To clone the Desktop Assistant repository into PyCharm IDE and install the required packages to run the project, you can follow these steps:
 
-1. ### Install PyCharm:
-    
+1. #### Install PyCharm
+
 If you haven't already, download and install PyCharm IDE on your computer. You can get it from the official JetBrains website.
 
-2. ### Clone the Repository:
- 
+1. #### Clone the Repository
+
 Open PyCharm and follow these steps:
 
 a. Click on "Check out from Version Control" on the welcome screen or from the "File" menu.
 
 b. Select "Git" as the version control system.
 
-c. In the "URL" field, enter the repository URL: 
-```
+c. In the "URL" field, enter the repository URL
+
+```bash
 https://github.com/rugwedpatharkar/Desktop_assistant.git
-```
+
 d. Choose a directory where you want to save the project on your local machine.
 
 e. Click the "Clone" button.
 
-3. ### Set Up a Virtual Environment (Optional but recommended):
+1. ### Set Up a Virtual Environment (Optional but recommended):
 To keep your project dependencies isolated, you can set up a virtual environment in PyCharm:
 
 a. In PyCharm, go to "File" > "Settings" (or "PyCharm" > "Preferences" on macOS).
@@ -97,9 +93,8 @@ b. Navigate to your project directory. You should see your project's files in th
 
 c. Install the required Python libraries using pip:
 
-```
+```bash
 pip install -r requirements.txt
-```
 
 5. ### Usage:
 Now that you've set up the project, you can run the Desktop Assistant script:
@@ -108,12 +103,10 @@ a. Make sure you have your virtual environment activated (if you created one) or
 
 b. Run the Desktop Assistant script:
 
-```
+```bash
 python assistant.py
-```
 
 
 That's it! You've successfully cloned the Desktop Assistant repository into PyCharm IDE and set up the project for development or usage.
-
 
 Follow the on-screen instructions and use voice or text commands to interact with the assistant, including taking screenshots when needed.
