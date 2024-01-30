@@ -4,3 +4,5 @@ Pyautogui~=0.9.54
 requests~=2.31.0
 psutil~=5.9.6
 SpeechRecognition~=3.10.1
+pywhatkit
+pyaudio
