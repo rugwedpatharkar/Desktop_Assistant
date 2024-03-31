@@ -66,13 +66,15 @@ c. In the "URL" field, enter the repository URL
 
 ```bash
 https://github.com/rugwedpatharkar/Desktop_assistant.git
+```
 
 d. Choose a directory where you want to save the project on your local machine.
 
 e. Click the "Clone" button.
 
-1. ### Set Up a Virtual Environment (Optional but recommended):
-To keep your project dependencies isolated, you can set up a virtual environment in PyCharm:
+1. ### Set Up a Virtual Environment (Optional but recommended)
+
+   To keep your project dependencies isolated, you can set up a virtual environment in PyCharm:
 
 a. In PyCharm, go to "File" > "Settings" (or "PyCharm" > "Preferences" on macOS).
 
@@ -84,8 +86,9 @@ d. Choose "Virtual Environment" and configure it according to your preferences.
 
 e. Click "OK" to create the virtual environment.
 
-4. ### Install Required Packages:
-With your project open in PyCharm:
+4. ### Install Required Packages
+
+   With your project open in PyCharm:
 
 a. Open a terminal within PyCharm by going to "View" > "Tool Windows" > "Terminal."
 
@@ -95,9 +98,11 @@ c. Install the required Python libraries using pip:
 
 ```bash
 pip install -r requirements.txt
+```
 
-5. ### Usage:
-Now that you've set up the project, you can run the Desktop Assistant script:
+5. ### Usage
+
+   Now that you've set up the project, you can run the Desktop Assistant script:
 
 a. Make sure you have your virtual environment activated (if you created one) or use the system Python interpreter.
 
@@ -105,7 +110,7 @@ b. Run the Desktop Assistant script:
 
 ```bash
 python assistant.py
-
+```
 
 That's it! You've successfully cloned the Desktop Assistant repository into PyCharm IDE and set up the project for development or usage.
 
